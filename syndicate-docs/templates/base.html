@@ -1,23 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="styles.css">
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>$title$</title>
+    <link rel="stylesheet" href="../templates/styles.css" />
+  </head>
+  <body>
+    <div class="doc-shell">
+      <div class="page">
+        <header class="cover">
+          <div class="cover-header">
+            <div class="masthead-logo-wrap">
+              <img
+                src="../assets/logo-primary-dark.svg"
+                alt="Syndicate Systems"
+                class="brand-asset logo-primary"
+              />
+            </div>
 
-<body>
+            <div class="cover-accent-wrap">
+              <img
+                src="../assets/cover-accent-dark.svg"
+                alt=""
+                aria-hidden="true"
+                class="brand-asset cover-accent"
+              />
+            </div>
 
-<div class="header">
-  <img src="../assets/logo.png" class="logo">
-</div>
+            <div class="title-block">
+              <h1 class="doc-title">$title$</h1>
 
-<div class="content">
-$body$
-</div>
+              $if(subtitle)$
+              <p class="doc-subtitle">$subtitle$</p>
+              $endif$
 
-<div class="footer">
-  Syndicate Systems — Confidential
-</div>
+              <div class="cover-meta" aria-label="Document details">
+                $if(client)$
+                <div class="meta-row">
+                  <span class="meta-label">Client</span>
+                  <span class="meta-value">$client$</span>
+                </div>
+                $endif$
 
-</body>
+                $if(date)$
+                <div class="meta-row">
+                  <span class="meta-label">Date</span>
+                  <span class="meta-value">$date$</span>
+                </div>
+                $endif$
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="content">
+          $body$
+        </main>
+
+        <footer class="page-footer">
+          <div class="footer-inner">
+            <div class="footer-mark-wrap">
+              <img
+                src="../assets/footer-mark-dark.svg"
+                alt="Syndicate Systems"
+                class="brand-asset footer-mark"
+              />
+            </div>
+            <div class="footer-page">
+              <span class="page-label">Page</span>
+              <span class="page-number"></span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
 </html>

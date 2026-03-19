@@ -1,23 +1,259 @@
+:root {
+  --page-bg: #f5f6f8;
+  --paper-bg: #ffffff;
+  --text-main: #121826;
+  --text-muted: #5b6474;
+  --rule: #dde1e8;
+  --heading-serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+  --body-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --page-width: 720px;
+  --outer-margin: 40px;
+  --inner-padding-y: 2.5rem;
+  --inner-padding-x: 2rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  font-family: Helvetica, Arial, sans-serif;
-  margin: 60px;
-  color: #111;
+  margin: 0;
+  padding: 0;
 }
 
-.header {
-  margin-bottom: 40px;
-}
-
-.logo {
-  height: 40px;
-}
-
-.content {
+body {
+  background: var(--page-bg);
+  color: var(--text-main);
+  font-family: var(--body-sans);
   line-height: 1.6;
 }
 
-.footer {
-  margin-top: 60px;
+.doc-shell {
+  padding: var(--outer-margin) 16px;
+}
+
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  background: var(--paper-bg);
+  padding: var(--inner-padding-y) var(--inner-padding-x);
+  border: 1px solid var(--rule);
+}
+
+/* BRAND ASSET BASICS */
+
+.brand-asset {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-primary {
+  width: 140px;
+}
+
+.wordmark {
+  width: 180px; /* within 140–220px range */
+}
+
+.cover-accent {
+  width: 260px;
+  max-width: 35%;
+  opacity: 0.7;
+}
+
+.logo-mark {
+  width: 22px; /* within 18–28px range */
+}
+
+.footer-mark {
+  width: 16px; /* within 14–18px range */
+  opacity: 0.6;
+}
+
+/* COVER / TITLE BLOCK */
+
+.cover {
+  margin-bottom: 24px;
+}
+
+.cover-header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.masthead-logo-wrap {
+  margin-bottom: 1rem;
+}
+
+.doc-title {
+  margin: 0;
+  font-family: var(--heading-serif);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.doc-subtitle {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.cover-meta {
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 8px;
+}
+
+.meta-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.meta-value {
+  color: var(--text-main);
+}
+
+.cover-accent-wrap {
+  margin: 0.75rem 0 1.75rem 0;
+}
+
+.title-block {
+  margin-top: 0.5rem;
+  max-width: 640px;
+}
+
+.title-block h1 {
+  margin-bottom: 0.75rem;
+}
+
+.title-block p {
+  margin-bottom: 0.5rem;
+}
+
+/* CONTENT AREA */
+
+.content {
+  margin-top: 24px;
+}
+
+/* Do not hide the first markdown heading; keep behavior deterministic */
+
+.content h1 {
+  font-family: var(--heading-serif);
+  font-size: 22px;
+  margin: 24px 0 10px;
+}
+
+.content h2 {
+  font-size: 16px;
+  margin: 22px 0 8px;
+}
+
+.content h3 {
+  font-size: 14px;
+  margin: 18px 0 6px;
+}
+
+.content p {
+  margin: 0 0 12px;
+}
+
+.content ul,
+.content ol {
+  margin: 8px 0 16px;
+  padding-left: 1.25em;
+}
+
+.content li {
+  margin: 4px 0;
+}
+
+.content hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 24px 0;
+}
+
+/* Optional structural marker class for rare logo-mark usage */
+.section-with-mark::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+  width: 14px;
+  height: 14px;
+  background: url("../assets/logo-mark-dark.svg") no-repeat center/contain;
+}
+
+/* FOOTER */
+
+.page-footer {
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.footer-mark-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-page {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  opacity: 0.7;
+}
+
+.page-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   font-size: 10px;
-  color: #666;
+}
+
+/* In many paged-media engines this will be populated in print/PDF */
+.page-number::after {
+  content: counter(page);
+}
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  .doc-shell {
+    padding: 0;
+  }
+
+  .page {
+    border: none;
+    margin: 0;
+    padding: 24px 28px;
+  }
 }
