@@ -1,16 +1,42 @@
+/* ==========================================================================
+   Syndicate Document System — Premium Advisory Template
+   White, restrained, architecture-forward. No ornament.
+   ========================================================================== */
+
 :root {
-  --page-bg: #f5f6f8;
+  /* Color */
+  --page-bg: #ffffff;
   --paper-bg: #ffffff;
-  --text-main: #121826;
-  --text-muted: #5b6474;
-  --rule: #dde1e8;
-  --heading-serif: ui-serif, Georgia, "Times New Roman", Times, serif;
-  --body-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  --text-main: #0d0d0d;
+  --text-muted: #4a5568;
+  --rule: #e2e8f0;
+  --rule-footer: #e8ecf0;
+
+  /* Typography */
+  --font-serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --page-width: 720px;
-  --outer-margin: 40px;
-  --inner-padding-y: 2.5rem;
-  --inner-padding-x: 2rem;
+  --line-body: 1.72;
+  --line-tight: 1.35;
+
+  /* Layout */
+  --page-width: 680px;
+  --text-column: 600px;
+  --outer-margin: 48px;
+  --inner-padding-y: 48px;
+  --inner-padding-x: 40px;
+
+  /* Spacing scale — consistent rhythm */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Header-specific (logo→accent, accent→title) */
+  --header-logo-accent: 14px;
+  --header-accent-title: 24px;
 }
 
 *,
@@ -28,12 +54,13 @@ body {
 body {
   background: var(--page-bg);
   color: var(--text-main);
-  font-family: var(--body-sans);
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: var(--line-body);
 }
 
 .doc-shell {
-  padding: var(--outer-margin) 16px;
+  padding: var(--outer-margin) 24px;
 }
 
 .page {
@@ -41,81 +68,103 @@ body {
   margin: 0 auto;
   background: var(--paper-bg);
   padding: var(--inner-padding-y) var(--inner-padding-x);
-  border: 1px solid var(--rule);
 }
 
-/* BRAND ASSET BASICS */
+/* ==========================================================================
+   Brand assets — deterministic, width + height:auto
+   ========================================================================== */
 
 .brand-asset {
   display: block;
   max-width: 100%;
   height: auto;
+  object-fit: contain;
 }
 
 .logo-primary {
-  width: 140px;
-}
-
-.wordmark {
-  width: 180px; /* within 140–220px range */
+  width: 160px;
 }
 
 .cover-accent {
-  width: 260px;
-  max-width: 35%;
-  opacity: 0.7;
-}
-
-.logo-mark {
-  width: 22px; /* within 18–28px range */
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.72;
 }
 
 .footer-mark {
-  width: 16px; /* within 14–18px range */
-  opacity: 0.6;
+  width: 18px;
+  opacity: 0.5;
 }
 
-/* COVER / TITLE BLOCK */
+.wordmark {
+  width: 180px;
+}
+
+.logo-mark {
+  width: 22px;
+}
+
+/* ==========================================================================
+   Header — unified composition (logo, accent divider, title)
+   ========================================================================== */
+
+.cover-accent-wrap {
+  flex-shrink: 0;
+  margin-top: var(--header-logo-accent);
+  margin-bottom: 0;
+}
 
 .cover {
-  margin-bottom: 24px;
+  margin-bottom: var(--space-2xl);
 }
 
 .cover-header {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: flex-start;
+  gap: 0;
 }
 
 .masthead-logo-wrap {
-  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.title-block {
+  max-width: var(--text-column);
+  margin-top: var(--header-accent-title);
 }
 
 .doc-title {
   margin: 0;
-  font-family: var(--heading-serif);
-  font-size: 28px;
-  font-weight: 600;
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: var(--line-tight);
 }
 
 .doc-subtitle {
-  margin: 0 0 14px;
+  margin: var(--space-sm) 0 0;
   font-size: 14px;
+  font-weight: 400;
   color: var(--text-muted);
+  letter-spacing: 0.01em;
 }
 
 .cover-meta {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
   border-top: 1px solid var(--rule);
-  padding-top: 10px;
   display: grid;
-  gap: 6px;
+  gap: var(--space-xs);
   font-size: 12px;
 }
 
 .meta-row {
   display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 8px;
+  grid-template-columns: 72px 1fr;
+  gap: var(--space-sm);
 }
 
 .meta-label {
@@ -129,68 +178,90 @@ body {
   color: var(--text-main);
 }
 
-.cover-accent-wrap {
-  margin: 0.75rem 0 1.75rem 0;
-}
-
-.title-block {
-  margin-top: 0.5rem;
-  max-width: 640px;
-}
-
-.title-block h1 {
-  margin-bottom: 0.75rem;
-}
-
-.title-block p {
-  margin-bottom: 0.5rem;
-}
-
-/* CONTENT AREA */
+/* ==========================================================================
+   Content — vertical rhythm, editorial column
+   ========================================================================== */
 
 .content {
-  margin-top: 24px;
+  margin-top: 56px;
+  max-width: var(--text-column);
+  color: var(--text-main);
 }
 
-/* Do not hide the first markdown heading; keep behavior deterministic */
+/* First content heading: suppress duplicate if same as doc title */
+.content h1:first-child {
+  display: none;
+}
 
 .content h1 {
-  font-family: var(--heading-serif);
-  font-size: 22px;
-  margin: 24px 0 10px;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  margin: var(--space-2xl) 0 var(--space-md);
+  letter-spacing: -0.01em;
+}
+
+.content h1:first-of-type {
+  margin-top: 0;
+}
+
+.content h2:first-of-type {
+  margin-top: 0;
 }
 
 .content h2 {
-  font-size: 16px;
-  margin: 22px 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #1a1a1a;
+  margin: 42px 0 var(--space-sm);
 }
 
 .content h3 {
   font-size: 14px;
-  margin: 18px 0 6px;
+  font-weight: 600;
+  margin: var(--space-lg) 0 var(--space-sm);
 }
 
 .content p {
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-md);
 }
 
 .content ul,
 .content ol {
-  margin: 8px 0 16px;
-  padding-left: 1.25em;
+  margin: var(--space-sm) 0 var(--space-lg);
+  padding-left: 1.5em;
 }
 
 .content li {
-  margin: 4px 0;
+  margin: var(--space-xs) 0;
+  line-height: var(--line-body);
+}
+
+/* Ordered lists: authoritative, executive actions */
+.content ol {
+  list-style-type: decimal;
+  padding-left: 2em;
+}
+
+.content ol li {
+  padding-left: 0.5em;
+}
+
+/* Placeholder/italic content: muted, not loud */
+.content em {
+  color: var(--text-muted);
+  font-style: normal;
+  font-weight: 400;
 }
 
 .content hr {
   border: 0;
   border-top: 1px solid var(--rule);
-  margin: 24px 0;
+  margin: var(--space-lg) 0;
 }
 
-/* Optional structural marker class for rare logo-mark usage */
 .section-with-mark::before {
   content: "";
   display: inline-block;
@@ -198,37 +269,28 @@ body {
   margin-right: 6px;
   width: 14px;
   height: 14px;
-  background: url("../assets/logo-mark-dark.svg") no-repeat center/contain;
+  background: url("../assets/footer-mark.png") no-repeat center/contain;
 }
 
-/* FOOTER */
+/* ==========================================================================
+   Footer — understated, intentional
+   ========================================================================== */
 
 .page-footer {
-  margin-top: 28px;
-  padding-top: 12px;
-  border-top: 1px solid var(--rule);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--rule-footer);
 }
 
 .footer-inner {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
-  gap: 12px;
+  gap: 6px;
   font-size: 11px;
   color: var(--text-muted);
-}
-
-.footer-mark-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer-page {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  opacity: 0.7;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .page-label {
@@ -237,23 +299,83 @@ body {
   font-size: 10px;
 }
 
-/* In many paged-media engines this will be populated in print/PDF */
+/* Screen: show 1 (single-page preview). Print: use counter */
 .page-number::after {
-  content: counter(page);
+  content: "1";
+}
+
+/* ==========================================================================
+   Paged media — US Letter, true pagination, multi-page documents
+   ========================================================================== */
+
+@page {
+  size: 8.5in 11in;
+  margin: 0.75in;
 }
 
 @media print {
-  body {
+  html, body {
+    margin: 0;
+    padding: 0;
     background: #ffffff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    padding-bottom: 1.25in;
   }
 
   .doc-shell {
     padding: 0;
+    max-width: none;
   }
 
   .page {
     border: none;
     margin: 0;
-    padding: 24px 28px;
+    padding: 0;
+    max-width: none;
+    background: transparent;
+  }
+
+  /* Fixed footer on every printed page */
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0.25in 0.75in;
+    border-top: 1px solid var(--rule-footer);
+    background: #ffffff;
+  }
+
+  .page-number::after {
+    content: counter(page);
+  }
+
+  /* Page break control — keep headings with following content */
+  .content h2,
+  .content h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .content h2 + *,
+  .content h3 + * {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  .content ul,
+  .content ol {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .content li {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
