@@ -1,6 +1,6 @@
 /* ==========================================================================
    Syndicate Document System — Advisory Layout
-   Structured, minimal, high-trust. No boxes. Editorial flow.
+   Corporate letterhead aesthetic. Flex layout. Single divider. No clipping.
    ========================================================================== */
 
 :root {
@@ -12,6 +12,7 @@
   --rule: #5a6270;
   --rule-editorial: #a8b0b8;
   --rule-section: #b8c0c8;
+  --rule-frame: #e5e8ec;
 
   /* Typography */
   --font-serif: ui-serif, Georgia, "Times New Roman", Times, serif;
@@ -34,12 +35,11 @@
   --space-xl: 32px;
   --space-2xl: 48px;
 
-  /* Header band */
-  --header-band-padding: 20px;
-  --divider-margin-top: 18px;
-  --divider-margin-bottom: 34px;
-  --title-subtitle-spacing: 6px;
-  --title-divider-spacing: 14px;
+  /* Header — 110–130px target */
+  --header-row-height: 120px;
+  --header-padding-x: 32px;
+  --header-divider-spacing-top: 20px;
+  --header-divider-spacing-bottom: 28px;
   --title-to-content: 36px;
 }
 
@@ -53,6 +53,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow: visible;
 }
 
 body {
@@ -65,102 +66,109 @@ body {
 
 .doc-shell {
   padding: 48px 24px;
+  overflow: visible;
 }
 
 .page {
   max-width: var(--page-width);
   margin: 0 auto;
   background: var(--paper-bg);
-  padding: 0 var(--inner-padding-x) var(--inner-padding-y);
+  padding: 0 var(--inner-padding-x) 120px;
   position: relative;
+  overflow: visible;
 }
 
 /* ==========================================================================
-   1. HEADER BAND — full-width, subtle tone, logo left / contact right
+   1. HEADER — single row: [ branding ] | [ contact ]
    ========================================================================== */
 
-.header-band {
-  margin: 0 calc(-1 * var(--inner-padding-x));
-  padding: var(--header-band-padding) var(--inner-padding-x);
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px var(--inner-padding-x);
   background: var(--header-band-bg);
+  margin: 0 calc(-1 * var(--inner-padding-x));
 }
 
-.header-band-inner {
-  max-width: var(--text-column);
-  margin: 0 auto;
-  padding-left: var(--space-lg);
+.branding {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-lg);
-}
-
-.header-band-left {
+  gap: 16px;
   flex-shrink: 0;
 }
 
-.header-band-right {
+.header-logo {
+  height: 76px;
+  width: auto;
+  object-fit: contain;
   flex-shrink: 0;
+}
+
+.contact-section {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 64px;
+  background: #ccc;
+  flex-shrink: 0;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.contact-link {
+  font-size: 13px;
+  color: var(--text-main);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.contact-link:hover {
+  color: var(--text-muted);
 }
 
 /* ==========================================================================
-   Brand assets
+   3. SINGLE HEADER-BODY DIVIDER — one geometric divider only
    ========================================================================== */
 
-.brand-asset {
-  display: block;
-  max-width: 100%;
+.header-body-divider {
+  margin-top: 28px;
+  margin-bottom: var(--header-divider-spacing-bottom);
+  display: flex;
+  justify-content: center;
+}
+
+.header-body-divider-asset {
+  width: 100%;
+  max-width: var(--text-column);
   height: auto;
   object-fit: contain;
-}
-
-.logo-primary {
-  width: 140px;
-}
-
-.contact-block {
-  max-height: 48px;
-  width: auto;
-}
-
-.cover-asset {
-  width: 100%;
-  max-width: var(--text-column);
-  height: auto;
-  opacity: 0.65;
-}
-
-.footer-mark {
-  width: 26px;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 /* ==========================================================================
-   2. COVER DIVIDER — branded asset, only divider between header and body
-   ========================================================================== */
-
-.cover-divider {
-  margin-top: var(--divider-margin-top);
-  margin-bottom: var(--divider-margin-bottom);
-}
-
-.cover-divider img {
-  display: block;
-  width: 100%;
-  max-width: var(--text-column);
-  margin: 0 auto;
-}
-
-/* ==========================================================================
-   3. TITLE BLOCK — left-aligned, single divider below
+   4. TITLE BLOCK — no duplicate divider
    ========================================================================== */
 
 .title-block {
   max-width: var(--text-column);
   margin: 0 auto;
   padding-left: var(--space-lg);
+  padding-right: 0;
+  margin-bottom: 16px;
 }
 
 .doc-title {
@@ -173,7 +181,7 @@ body {
 }
 
 .doc-subtitle {
-  margin: var(--title-subtitle-spacing) 0 0;
+  margin: 6px 0 0;
   font-size: 14px;
   font-weight: 400;
   color: var(--text-muted);
@@ -204,17 +212,8 @@ body {
   color: var(--text-main);
 }
 
-.title-divider {
-  width: 50%;
-  max-width: 300px;
-  height: 0;
-  border-top: 1px solid var(--rule-section);
-  margin-top: var(--title-divider-spacing);
-  margin-bottom: var(--title-to-content);
-}
-
 /* ==========================================================================
-   4. BODY — editorial flow, optional left rail, no boxes
+   5. BODY — no overflow clip, editorial flow
    ========================================================================== */
 
 .content {
@@ -225,7 +224,9 @@ body {
   color: var(--text-main);
   padding-left: var(--space-lg);
   padding-right: 0;
+  padding-bottom: 56px;
   position: relative;
+  overflow: visible;
 }
 
 .content::before {
@@ -235,8 +236,8 @@ body {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: var(--rule-editorial);
-  opacity: 0.6;
+  background: var(--rule-frame);
+  opacity: 0.7;
 }
 
 .content h1:first-child {
@@ -269,9 +270,9 @@ body {
 }
 
 .content h2:not(:first-of-type) {
-  padding-top: 40px;
-  border-top: 1px solid var(--rule-section);
-  margin-top: 52px;
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--rule-frame);
+  margin-top: var(--space-2xl);
 }
 
 .content h3 {
@@ -331,18 +332,25 @@ body {
    ========================================================================== */
 
 .page-footer {
-  margin-top: var(--space-2xl);
-  padding-top: var(--space-lg);
-  border-top: 1px solid var(--rule);
+  position: fixed;
+  bottom: 0;
+  left: 40px;
+  right: 40px;
+  margin: 0;
+  padding: 6px 0 0;
+  border-top: 1px solid var(--rule-frame);
+  background: #ffffff;
+  text-align: center;
 }
 
 .footer-inner {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  font-size: 11px;
-  color: var(--text-muted);
+  gap: 0;
+  font-size: 10px;
+  color: #777;
   font-weight: 400;
   letter-spacing: 0.04em;
 }
@@ -362,20 +370,35 @@ body {
   content: "1";
 }
 
+.brand-asset {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.footer-mark {
+  width: 24px;
+  opacity: 0.7;
+}
+
 /* ==========================================================================
-   Paged media — US Letter, pagination
+   Paged media — US Letter, pagination, no clipping
    ========================================================================== */
 
 @page {
   size: 8.5in 11in;
-  margin: 0.75in;
+  margin-top: 80px;
+  margin-bottom: 120px;
+  margin-left: 40px;
+  margin-right: 40px;
 
   @bottom-center {
     content: "PAGE " counter(page);
     font-size: 10px;
     font-weight: 400;
     letter-spacing: 0.08em;
-    color: #4a5260;
+    color: #777;
     text-transform: uppercase;
   }
 }
@@ -387,15 +410,17 @@ body {
     background: #ffffff;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    overflow: visible;
   }
 
   body {
-    padding-bottom: 1in;
+    padding-bottom: 0;
   }
 
   .doc-shell {
     padding: 0;
     max-width: none;
+    overflow: visible;
   }
 
   .page {
@@ -404,10 +429,10 @@ body {
     padding: 0;
     max-width: none;
     background: transparent;
-    padding-bottom: 1in;
+    overflow: visible;
   }
 
-  .header-band {
+  .header {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -415,13 +440,15 @@ body {
   .page-footer {
     position: fixed;
     bottom: 0;
-    left: calc((100% - var(--text-column)) / 2);
-    width: var(--text-column);
+    left: 40px;
+    right: 40px;
     margin: 0;
-    padding: 0.2in var(--space-lg);
-    border-top: 1px solid var(--rule);
-    background: #ffffff;
-    box-sizing: border-box;
+    padding: 6px 0 0;
+    border-top: 1px solid var(--rule-frame);
+    background: transparent;
+    text-align: center;
+    font-size: 10px;
+    color: #777;
   }
 
   .page-footer .page-label,
@@ -430,21 +457,21 @@ body {
   }
 
   .footer-mark {
-    width: 26px;
+    width: 28px;
     opacity: 0.85;
-  }
-
-  .content::before {
-    background: var(--rule-editorial);
-    opacity: 0.75;
   }
 
   .content h2:not(:first-of-type) {
     border-top-color: var(--rule-section);
   }
 
-  .cover-asset {
-    opacity: 0.7;
+  .header-body-divider-asset {
+    opacity: 0.65;
+  }
+
+  .content p {
+    orphans: 2;
+    widows: 2;
   }
 
   .content h2,
