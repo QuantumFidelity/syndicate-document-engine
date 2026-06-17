@@ -1,0 +1,212 @@
+/* Letter of Intent — layout matching reference mockup */
+
+.loi-doc {
+  font-family: var(--font-sans);
+  --loi-rule: #c8d0d8;
+  --loi-rule-strong: #9aa5b1;
+}
+
+.loi-doc .doc-shell {
+  padding: 36px 24px;
+}
+
+.loi-doc .header-logo {
+  height: 64px;
+}
+
+.loi-doc .header-body-divider {
+  margin: 18px 0 22px;
+}
+
+.loi-doc .loi-content {
+  line-height: 1.55;
+}
+
+/* Title */
+.loi-doc .content > h1:first-child {
+  display: block;
+  margin: 0 0 0;
+  padding: 0 0 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-transform: none;
+  border: none;
+  border-bottom: 1px solid var(--loi-rule);
+  color: var(--text-main);
+}
+
+/* Metadata — ruled rows */
+.loi-doc .content > p:has(> strong:first-child):not(:has(> strong:only-child)) {
+  margin: 0;
+  padding: 0.55rem 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  border-left: none;
+  border-bottom: 1px solid var(--loi-rule);
+}
+
+.loi-doc .content > p:has(> strong:first-child):not(:has(> strong:only-child)) strong {
+  display: inline;
+  min-width: 0;
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: inherit;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Stronger rule after last metadata row (Proposed Subcontractor), before body */
+.loi-doc .content > p:nth-child(5) {
+  border-bottom: 1px solid var(--loi-rule-strong);
+  margin-bottom: 0.2rem;
+}
+
+/* Body */
+.loi-doc .content > p:not(:has(> strong:first-child)) {
+  margin: 0.85rem 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.loi-doc .content > hr {
+  display: none;
+}
+
+/* Signature section */
+.signature-section {
+  margin-top: 1.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--loi-rule-strong);
+}
+
+.signature-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.signature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  align-items: stretch;
+}
+
+.signature-row-head {
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--loi-rule);
+}
+
+.sig-col {
+  min-width: 0;
+}
+
+.signature-row-head .sig-col h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-main);
+}
+
+.sig-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sig-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #2b5f8c;
+  margin: 0 0 0.2rem;
+  line-height: 1.2;
+}
+
+/* Fixed-height slot keeps left/right lines aligned */
+.sig-print-area,
+.sig-sign-area {
+  display: block;
+  min-height: 1.15rem;
+  font-size: 14px;
+  line-height: 1.15rem;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.sig-print-area-empty::before {
+  content: "\00a0";
+}
+
+.sig-sign-area {
+  min-height: 1.25rem;
+}
+
+.sig-sign-area::before {
+  content: "\00a0";
+}
+
+.sig-field > p {
+  display: contents;
+}
+
+.sig-line {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #1a1a1a;
+  height: 0;
+  margin: 0.2rem 0 0;
+  padding: 0;
+}
+
+.signature-section p {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+@media print {
+  .loi-doc {
+    --print-footer-reserve: 0.8in;
+  }
+
+  .loi-doc .doc-shell {
+    padding: 0;
+  }
+
+  .loi-doc .header {
+    padding: 12px var(--inner-padding-x);
+  }
+
+  .loi-doc .header-logo {
+    height: 58px;
+  }
+
+  .loi-doc .header-body-divider {
+    margin: 10px 0 16px;
+  }
+
+  .loi-doc .header-body-divider-asset {
+    max-height: 32px;
+    width: auto;
+  }
+
+  .signature-section {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+  }
+
+  .loi-doc .content > h1:first-child {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}

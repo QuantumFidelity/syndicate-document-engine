@@ -1,0 +1,87 @@
+/* Technical Capability Statement — federal narrative layout (print-first) */
+
+.tcs-doc {
+  font-family: var(--font-sans);
+}
+
+.tcs-doc .doc-shell {
+  padding: 36px 24px;
+}
+
+.tcs-doc .header-logo {
+  height: 64px;
+}
+
+.tcs-doc .header-body-divider {
+  margin: 18px 0 22px;
+}
+
+.tcs-doc .tcs-title-block {
+  margin-bottom: var(--space-lg);
+}
+
+.tcs-doc .tcs-meta {
+  margin-top: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--rule-section);
+}
+
+.tcs-doc .tcs-meta .meta-row {
+  grid-template-columns: 96px 1fr;
+}
+
+.tcs-doc .tcs-meta .meta-value {
+  line-height: 1.45;
+}
+
+.tcs-doc .tcs-content {
+  line-height: 1.6;
+}
+
+/* YAML title may duplicate template h1 if present in body */
+.tcs-doc .tcs-content > h1:first-child {
+  display: none;
+}
+
+.tcs-doc .tcs-content > h2:first-of-type {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+@media print {
+  .tcs-doc {
+    --print-footer-reserve: 0.85in;
+  }
+
+  .tcs-doc .doc-shell {
+    padding: 0;
+  }
+
+  .tcs-doc .header {
+    padding: 12px var(--inner-padding-x);
+  }
+
+  .tcs-doc .header-logo {
+    height: 58px;
+  }
+
+  .tcs-doc .header-body-divider {
+    margin: 10px 0 16px;
+  }
+
+  .tcs-doc .header-body-divider-asset {
+    max-height: 32px;
+    width: auto;
+  }
+
+  .tcs-doc .tcs-title-block {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .tcs-doc .tcs-content h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}

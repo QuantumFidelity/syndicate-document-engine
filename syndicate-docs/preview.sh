@@ -9,10 +9,14 @@ if [ -z "$INPUT" ]; then
   exit 1
 fi
 
-# If the user passes just a filename, assume it lives in documents/
 if [[ "$INPUT" != */* ]]; then
   INPUT="documents/$INPUT"
 fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+# shellcheck source=lib/render.sh
+source "$SCRIPT_DIR/lib/render.sh"
 
 if [ ! -f "$INPUT" ]; then
   echo "Error: '$INPUT' not found."
@@ -24,12 +28,25 @@ fi
 OUTPUT_DIR="output"
 mkdir -p "$OUTPUT_DIR"
 OUTPUT=$(basename "$INPUT" .md)
+HTML_FILE="$OUTPUT_DIR/$OUTPUT.html"
+PDF_FILE="$OUTPUT_DIR/$OUTPUT.pdf"
+TITLE="${OUTPUT//_/ }"
 
-pandoc "$INPUT" \
-  --from markdown \
-  --standalone \
-  --template templates/base.html \
-  --css templates/styles.css \
-  -o "$OUTPUT_DIR/$OUTPUT.html"
+render_html "$INPUT" "$HTML_FILE" "$TITLE"
+echo "HTML saved to: $HTML_FILE"
 
-open "$OUTPUT_DIR/$OUTPUT.html"
+CHROME="$(find_chrome || true)"
+if [ -z "$CHROME" ]; then
+  echo "Error: Chrome/Chromium required for paginated preview. Install google-chrome."
+  exit 1
+fi
+
+PDF_ABS="$SCRIPT_DIR/$PDF_FILE"
+if ! render_pdf "$SCRIPT_DIR" "$HTML_FILE" "$PDF_ABS" "$CHROME"; then
+  echo "Error: PDF preview generation failed."
+  exit 1
+fi
+
+echo "Preview PDF (US Letter): $PDF_FILE"
+echo "This matches the output from ./build.sh"
+open_in_browser "file://${PDF_ABS}"

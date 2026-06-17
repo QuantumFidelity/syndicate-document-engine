@@ -1,0 +1,166 @@
+/* Cover Letter — business letter layout (print-first) */
+
+.cover-letter-doc {
+  font-family: var(--font-sans);
+  --letter-rule: #c8d0d8;
+  --letter-rule-strong: #9aa5b1;
+}
+
+.cover-letter-doc .doc-shell {
+  padding: 36px 24px;
+}
+
+.cover-letter-doc .header-logo {
+  height: 64px;
+}
+
+.cover-letter-doc .header-body-divider {
+  margin: 18px 0 22px;
+}
+
+.cover-letter-doc .cover-letter-content {
+  line-height: 1.55;
+}
+
+.cover-letter-doc .content > h1:first-child {
+  display: none;
+}
+
+.letter-date {
+  margin: 0 0 1.25rem;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.letter-recipient {
+  margin: 0 0 1.15rem;
+}
+
+.letter-recipient p {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.letter-recipient-name {
+  font-weight: 600;
+}
+
+.letter-address {
+  margin: 0.15rem 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.letter-re,
+.letter-prime {
+  margin: 0 0 0.55rem;
+  padding: 0 0 0.65rem;
+  font-size: 13.5px;
+  line-height: 1.45;
+  border-bottom: 1px solid var(--letter-rule);
+}
+
+.letter-prime {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--letter-rule-strong);
+}
+
+.letter-re-label,
+.letter-meta-label {
+  font-weight: 700;
+}
+
+.cover-letter-doc .cover-letter-content > p {
+  margin: 0 0 0.85rem;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cover-letter-doc .cover-letter-content > p:first-of-type {
+  margin-top: 0.15rem;
+}
+
+.cover-letter-doc .cover-letter-content > ul,
+.cover-letter-doc .cover-letter-content > ol {
+  margin: 0 0 0.85rem;
+  padding-left: 1.35em;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Fallback if markdown is accidentally fenced as a code block */
+.cover-letter-doc .cover-letter-content pre,
+.cover-letter-doc .cover-letter-content .sourceCode {
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.letter-signature-block {
+  margin-top: 1.35rem;
+  padding-top: 0.25rem;
+}
+
+.letter-signature-block p {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.letter-closing-word {
+  margin-bottom: 1.15rem !important;
+}
+
+.letter-signer-name {
+  font-weight: 600;
+}
+
+.letter-signer-title {
+  margin-top: 0.1rem !important;
+  color: var(--text-muted);
+}
+
+.letter-company {
+  margin-top: 0.1rem !important;
+  font-weight: 600;
+}
+
+@media print {
+  .cover-letter-doc {
+    --print-footer-reserve: 0.8in;
+  }
+
+  .cover-letter-doc .doc-shell {
+    padding: 0;
+  }
+
+  .cover-letter-doc .header {
+    padding: 12px var(--inner-padding-x);
+  }
+
+  .cover-letter-doc .header-logo {
+    height: 58px;
+  }
+
+  .cover-letter-doc .header-body-divider {
+    margin: 10px 0 16px;
+  }
+
+  .cover-letter-doc .header-body-divider-asset {
+    max-height: 32px;
+    width: auto;
+  }
+
+  .letter-signature-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

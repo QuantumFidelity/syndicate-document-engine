@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Syndicate Document System — Advisory Layout
-   Corporate letterhead aesthetic. Flex layout. Single divider. No clipping.
+   Syndicate Document System — Advisory Layout (print-first)
+   US Letter · government capability statement formatting
    ========================================================================== */
 
 :root {
@@ -9,38 +9,30 @@
   --header-band-bg: #fcfcfc;
   --text-main: #0d0d0d;
   --text-muted: #4a5568;
-  --rule: #5a6270;
-  --rule-editorial: #a8b0b8;
-  --rule-section: #b8c0c8;
   --rule-frame: #e5e8ec;
+  --rule-section: #d0d6de;
 
-  /* Typography */
   --font-serif: ui-serif, Georgia, "Times New Roman", Times, serif;
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --line-body: 1.72;
+  --line-body: 1.65;
   --line-tight: 1.35;
 
-  /* Layout */
-  --page-width: 680px;
-  --text-column: 600px;
-  --inner-padding-x: 40px;
-  --inner-padding-y: 48px;
+  --page-width: 7.25in;
+  --text-column: 6.5in;
+  --inner-padding-x: 0.375in;
 
-  /* Spacing */
-  --space-xs: 8px;
-  --space-sm: 12px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
+  --space-xs: 6px;
+  --space-sm: 10px;
+  --space-md: 14px;
+  --space-lg: 20px;
+  --space-xl: 28px;
 
-  /* Header — 110–130px target */
-  --header-row-height: 120px;
-  --header-padding-x: 32px;
-  --header-divider-spacing-top: 20px;
-  --header-divider-spacing-bottom: 28px;
-  --title-to-content: 36px;
+  /* Section rhythm (screen + print) */
+  --section-gap: 28px;
+  --section-rule-gap: 18px;
+
+  --print-footer-reserve: 1.05in;
 }
 
 *,
@@ -53,40 +45,37 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow: visible;
 }
 
 body {
   background: var(--page-bg);
   color: var(--text-main);
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 14px;
   line-height: var(--line-body);
 }
 
 .doc-shell {
   padding: 48px 24px;
-  overflow: visible;
 }
 
 .page {
   max-width: var(--page-width);
   margin: 0 auto;
   background: var(--paper-bg);
-  padding: 0 var(--inner-padding-x) 120px;
+  padding: 0 var(--inner-padding-x);
   position: relative;
-  overflow: visible;
 }
 
 /* ==========================================================================
-   1. HEADER — single row: [ branding ] | [ contact ]
+   Header
    ========================================================================== */
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px var(--inner-padding-x);
+  padding: 20px var(--inner-padding-x);
   background: var(--header-band-bg);
   margin: 0 calc(-1 * var(--inner-padding-x));
 }
@@ -94,59 +83,44 @@ body {
 .branding {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
+  gap: 14px;
 }
 
 .header-logo {
-  height: 76px;
+  height: 72px;
   width: auto;
   object-fit: contain;
-  flex-shrink: 0;
 }
 
 .contact-section {
   display: flex;
   align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
+  gap: 18px;
 }
 
 .divider-vertical {
   width: 1px;
-  height: 64px;
+  height: 60px;
   background: #ccc;
-  flex-shrink: 0;
 }
 
 .contact {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
-  gap: 6px;
+  gap: 5px;
   text-align: right;
-  flex-shrink: 0;
 }
 
 .contact-link {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-main);
   text-decoration: none;
   letter-spacing: 0.02em;
 }
 
-.contact-link:hover {
-  color: var(--text-muted);
-}
-
-/* ==========================================================================
-   3. SINGLE HEADER-BODY DIVIDER — one geometric divider only
-   ========================================================================== */
-
 .header-body-divider {
-  margin-top: 28px;
-  margin-bottom: var(--header-divider-spacing-bottom);
+  margin: 22px 0 24px;
   display: flex;
   justify-content: center;
 }
@@ -160,21 +134,19 @@ body {
 }
 
 /* ==========================================================================
-   4. TITLE BLOCK — no duplicate divider
+   Title block
    ========================================================================== */
 
 .title-block {
   max-width: var(--text-column);
-  margin: 0 auto;
+  margin: 0 auto 14px;
   padding-left: var(--space-lg);
-  padding-right: 0;
-  margin-bottom: 16px;
 }
 
 .doc-title {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: var(--line-tight);
@@ -182,10 +154,8 @@ body {
 
 .doc-subtitle {
   margin: 6px 0 0;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
   color: var(--text-muted);
-  letter-spacing: 0.01em;
 }
 
 .cover-meta {
@@ -208,25 +178,15 @@ body {
   color: var(--text-muted);
 }
 
-.meta-value {
-  color: var(--text-main);
-}
-
 /* ==========================================================================
-   5. BODY — no overflow clip, editorial flow
+   Body content
    ========================================================================== */
 
 .content {
-  margin-top: 0;
   max-width: var(--text-column);
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--text-main);
-  padding-left: var(--space-lg);
-  padding-right: 0;
-  padding-bottom: 56px;
+  margin: 0 auto;
+  padding: 0 0 0 var(--space-lg);
   position: relative;
-  overflow: visible;
 }
 
 .content::before {
@@ -240,196 +200,149 @@ body {
   opacity: 0.7;
 }
 
-.content h1:first-child {
+/* Hide duplicate title from markdown */
+.content > h1:first-child {
   display: none;
 }
 
-.content h1 {
-  font-family: var(--font-serif);
-  font-size: 20px;
-  font-weight: 600;
-  margin: var(--space-2xl) 0 var(--space-md);
-  letter-spacing: -0.01em;
-}
-
-.content h1:first-of-type {
-  margin-top: 0;
+/* Section headings (##) */
+.content h2 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #1a1a1a;
+  margin: var(--section-gap) 0 var(--space-sm);
+  padding: 0;
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 .content h2:first-of-type {
   margin-top: 0;
 }
 
-.content h2 {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #1a1a1a;
-  margin: 42px 0 var(--space-sm);
-}
-
 .content h2:not(:first-of-type) {
-  padding-top: var(--space-xl);
   border-top: 1px solid var(--rule-frame);
-  margin-top: var(--space-2xl);
+  padding-top: var(--section-rule-gap);
 }
 
+/* Subsection headings (###) */
 .content h3 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  margin: var(--space-lg) 0 var(--space-sm);
+  margin: var(--space-md) 0 var(--space-xs);
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.content h2 + h3 {
+  margin-top: var(--space-sm);
+}
+
+.content h4 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: var(--space-sm) 0 var(--space-xs);
+  color: var(--text-muted);
 }
 
 .content p {
   margin: 0 0 var(--space-md);
 }
 
+.content p:last-child {
+  margin-bottom: 0;
+}
+
 .content ul,
 .content ol {
-  margin: var(--space-sm) 0 var(--space-lg);
-  padding-left: 1.5em;
+  margin: var(--space-xs) 0 var(--space-md);
+  padding-left: 1.35em;
 }
 
 .content li {
-  margin: var(--space-xs) 0;
-  line-height: var(--line-body);
+  margin: 4px 0;
+  padding: 0;
 }
 
-.content ol {
-  list-style-type: decimal;
-  padding-left: 2em;
+.content li + li {
+  margin-top: 3px;
 }
 
-.content ol li {
-  padding-left: 0.5em;
+.content strong {
+  font-weight: 600;
 }
 
 .content em {
   color: var(--text-muted);
   font-style: normal;
-  font-weight: 400;
 }
 
 .content hr {
-  border: 0;
-  border-top: 1px solid var(--rule-section);
-  margin: var(--space-lg) 0;
-}
-
-.section-with-mark::before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 6px;
-  width: 14px;
-  height: 14px;
-  background: url("../assets/footer-mark.png") no-repeat center/contain;
+  display: none;
 }
 
 /* ==========================================================================
-   Footer
+   Footer (print)
    ========================================================================== */
 
 .page-footer {
-  position: fixed;
-  bottom: 0;
-  left: 40px;
-  right: 40px;
-  margin: 0;
-  padding: 6px 0 0;
-  border-top: 1px solid var(--rule-frame);
-  background: #ffffff;
-  text-align: center;
+  display: none;
 }
 
 .footer-inner {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 0;
-  font-size: 10px;
-  color: #777;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
-
-.footer-mark-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.page-label {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 10px;
-}
-
-.page-number::after {
-  content: "1";
-}
-
-.brand-asset {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
 }
 
 .footer-mark {
-  width: 24px;
-  opacity: 0.7;
+  width: 20px;
+  height: auto;
+  opacity: 0.85;
+  display: block;
 }
 
 /* ==========================================================================
-   Paged media — US Letter, pagination, no clipping
+   Paged media — US Letter
    ========================================================================== */
 
 @page {
-  size: 8.5in 11in;
-  margin-top: 80px;
-  margin-bottom: 120px;
-  margin-left: 40px;
-  margin-right: 40px;
+  size: letter;
+  margin: 0.5in 0.625in var(--print-footer-reserve) 0.625in;
 
   @bottom-center {
     content: "PAGE " counter(page);
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
+    font-family: var(--font-sans);
+    font-size: 8px;
+    line-height: 1;
+    letter-spacing: 0.1em;
     color: #777;
     text-transform: uppercase;
+    vertical-align: top;
+    margin-bottom: 0.05in;
   }
 }
 
 @media print {
-  html, body {
+  html,
+  body {
     margin: 0;
     padding: 0;
     background: #ffffff;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    overflow: visible;
-  }
-
-  body {
-    padding-bottom: 0;
   }
 
   .doc-shell {
     padding: 0;
-    max-width: none;
-    overflow: visible;
   }
 
   .page {
-    border: none;
     margin: 0;
-    padding: 0;
+    padding: 0 var(--inner-padding-x);
     max-width: none;
     background: transparent;
-    overflow: visible;
   }
 
   .header {
@@ -437,63 +350,44 @@ body {
     print-color-adjust: exact;
   }
 
-  .page-footer {
-    position: fixed;
-    bottom: 0;
-    left: 40px;
-    right: 40px;
-    margin: 0;
-    padding: 6px 0 0;
-    border-top: 1px solid var(--rule-frame);
-    background: transparent;
-    text-align: center;
-    font-size: 10px;
-    color: #777;
-  }
-
-  .page-footer .page-label,
-  .page-footer .page-number {
-    display: none;
-  }
-
-  .footer-mark {
-    width: 28px;
-    opacity: 0.85;
-  }
-
-  .content h2:not(:first-of-type) {
-    border-top-color: var(--rule-section);
-  }
-
   .header-body-divider-asset {
     opacity: 0.65;
   }
 
+  .content {
+    padding-bottom: 0;
+  }
+
   .content p {
-    orphans: 2;
-    widows: 2;
+    orphans: 3;
+    widows: 3;
   }
 
-  .content h2,
-  .content h3 {
-    break-after: avoid;
-    page-break-after: avoid;
-  }
-
-  .content h2 + *,
-  .content h3 + * {
-    break-before: avoid;
-    page-break-before: avoid;
-  }
-
+  /* Allow lists to break across pages; keep items readable */
   .content ul,
   .content ol {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   .content li {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  /* Small transparent footer — no solid band that covers text */
+  .page-footer {
+    display: block;
+    position: fixed;
+    bottom: 0.14in;
+    left: 0.625in;
+    right: 0.625in;
+    height: auto;
+    margin: 0;
+    padding: 4px 0 0;
+    border-top: 1px solid var(--rule-frame);
+    background: transparent;
+    text-align: center;
+    z-index: 1;
   }
 }

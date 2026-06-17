@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>$if(title)$$title$$else$Cover Letter$endif$</title>
+    <link rel="stylesheet" href="../../templates/styles.css" />
+    <link rel="stylesheet" href="../../templates/cover_letter.css" />
+  </head>
+  <body class="cover-letter-doc">
+    <div class="doc-shell">
+      <div class="page">
+        <header class="header">
+          <div class="branding">
+            <img
+              src="../../assets/logo-primary-print.png"
+              alt="Syndicate Systems"
+              class="header-logo"
+              width="252"
+              height="74"
+            />
+          </div>
+          <div class="contact-section">
+            <div class="divider-vertical"></div>
+            <div class="contact">
+              <a href="mailto:contact@syndicatesystems.co" class="contact-link">contact@syndicatesystems.co</a>
+              <a href="tel:+17027068806" class="contact-link">(702) 706-8806</a>
+              <a href="https://syndicatesystems.co" class="contact-link">syndicatesystems.co</a>
+            </div>
+          </div>
+        </header>
+
+        <div class="header-body-divider">
+          <img
+            src="../../assets/cover-asset-print.png"
+            alt=""
+            aria-hidden="true"
+            class="header-body-divider-asset"
+          />
+        </div>
+
+        <main class="content cover-letter-content">
+          $if(date)$
+          <p class="letter-date">$date$</p>
+          $endif$
+
+          <div class="letter-recipient" aria-label="Recipient">
+            $if(recipient_name)$
+            <p class="letter-recipient-name">$recipient_name$</p>
+            $endif$
+            $if(recipient_title)$
+            <p class="letter-recipient-title">$recipient_title$</p>
+            $endif$
+            $if(agency)$
+            <p class="letter-agency">$agency$</p>
+            $endif$
+            $if(address_lines)$
+            <div class="letter-address">
+              $for(address_lines)$
+              <p>$address_lines$</p>
+              $endfor$
+            </div>
+            $elseif(address)$
+            <div class="letter-address">
+              <p>$address$</p>
+            </div>
+            $endif$
+          </div>
+
+          $if(subject)$
+          <p class="letter-re"><span class="letter-re-label">Re:</span> $subject$</p>
+          $elseif(solicitation)$
+          <p class="letter-re">
+            <span class="letter-re-label">Re:</span>
+            Solicitation $solicitation$$if(project)$ — $project$$endif$
+          </p>
+          $elseif(project)$
+          <p class="letter-re"><span class="letter-re-label">Re:</span> $project$</p>
+          $endif$
+
+          $if(prime)$
+          <p class="letter-prime"><span class="letter-meta-label">Prime Contractor:</span> $prime$</p>
+          $endif$
+
+          $body$
+
+          $if(signer_name)$
+          <div class="letter-signature-block">
+            <p class="letter-closing-word">$if(closing)$$closing$$else$Sincerely,$endif$</p>
+            <p class="letter-signer-name">$signer_name$</p>
+            $if(signer_title)$
+            <p class="letter-signer-title">$signer_title$</p>
+            $endif$
+            $if(company)$
+            <p class="letter-company">$company$</p>
+            $else$
+            <p class="letter-company">Syndicate Systems, LLC</p>
+            $endif$
+          </div>
+          $endif$
+        </main>
+      </div>
+    </div>
+
+    <footer class="page-footer" aria-hidden="true">
+      <div class="footer-inner">
+        <img
+          src="../../assets/footer-mark-print.png"
+          alt=""
+          class="footer-mark"
+          width="20"
+          height="20"
+        />
+      </div>
+    </footer>
+  </body>
+</html>
